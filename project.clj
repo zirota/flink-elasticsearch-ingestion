@@ -1,5 +1,5 @@
 (def version {:elasticsearch "7.17.1"
-              :flink         "1.14.4"
+              :flink         "1.14.5"
               :log4j         "2.17.2"})
 
 (defproject flink-elasticsearch-ingestion "0.1.0-SNAPSHOT"
@@ -10,6 +10,7 @@
   :dependencies [[org.clojure/clojure "1.11.1"]
                  [org.clojure/data.json "2.4.0"]
                  [org.clojure/tools.logging "1.2.4"]
+                 [clj-http "3.12.3"]
                  [org.apache.logging.log4j/log4j-api ~(:log4j version)]
                  [org.apache.logging.log4j/log4j-core ~(:log4j version)]
                  [io.kosong.flink/flink-clojure "0.1.0"]
@@ -18,6 +19,7 @@
                  [org.apache.flink/flink-runtime-web_2.12 ~(:flink version) :scope "provided"]
                  [org.elasticsearch.client/elasticsearch-rest-client ~(:elasticsearch version)]]
   
-  :main ^:skip-aot flink-elasticsearch-ingestion.core
+  :main flink-elasticsearch-ingestion.core
+  :aot [flink-elasticsearch-ingestion.core]
   :target-path "target/%s"
   :profiles {:uberjar {:aot :all}})
